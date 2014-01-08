@@ -200,6 +200,7 @@ public class REFrame extends JFrame {
 	private Action actionOpenPPV;
 	private Action actionOpenCocoViewer; // add hirao
 	private Action actionCreateCocoData; // add hirao
+	private Action actionClearCash;
 	private Action actionBytecode;
 
 	// ÅuHelpÅv
@@ -300,6 +301,7 @@ public class REFrame extends JFrame {
 		// menuTools.add(useRSSystem);
 		menuTools.add(actionOpenPPV);
 		menuTools.add(actionCreateCocoData);
+		menuTools.add(actionClearCash);
 		menuTools.add(actionOpenCocoViewer);
 
 		if (CJavaSystem.getInstance().isWindows()) {
@@ -628,6 +630,19 @@ public class REFrame extends JFrame {
 			// KeyStroke.getKeyStroke(KeyEvent.VK_B, CTRL_MASK));
 			action.setEnabled(true);
 			actionCreateCocoData = action;
+		}
+
+		{
+			Action action = new AbstractAction() {
+				public void actionPerformed(ActionEvent e) {
+					application.doClearCash();
+				}
+			};
+			action.putValue(Action.NAME, "Clear Cash");
+			// action.putValue(Action.ACCELERATOR_KEY,
+			// KeyStroke.getKeyStroke(KeyEvent.VK_B, CTRL_MASK));
+			action.setEnabled(true);
+			actionClearCash = action;
 		}
 
 		{
