@@ -14,6 +14,14 @@ public class IndentEngine {
 	 */
 	public static String execIndent(String before) {
 
+		// ;} というパターンの時に，; の後改行する． ; と } の間にスペースなどがあっても動作 hirao
+		// containsで正規表現使えないので，replaceAllで実装
+		// else 文の位置調整
+		before = before.replaceAll("\\}\\p{Space}*else", "\\} else");
+		// ;} を変換
+		before = before.replaceAll(";( |　|\t)*\\}", ";" + FileSystemUtil.CR
+				+ "\\}");
+
 		// 2011/11/20追記 macchan
 		while (before.contains("}}")) {
 			before = before.replace("}}", "}\n}");
@@ -65,5 +73,4 @@ public class IndentEngine {
 		scanner.close();
 		return buf.toString();
 	}
-
 }
